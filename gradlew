@@ -22,23 +22,25 @@
 #
 #   Important for running:
 #
-#       (1) You need a POSIX-compliant shell to run this script. If your /bin/sh is
-#           noncompliant, but you have some other compliant shell such as ksh or
-#           bash, then to run this script, type that shell name before the whole
-#           command line, like:
+#   (1) You need a POSIX-compliant shell to run this script. If your /bin/sh is
+#       noncompliant, but you have some other compliant shell such as ksh or
+#       bash, then to run this script, type that shell name before the whole
+#       command line, like:
 #
-#               ksh Gradle
+#           ksh Gradle
 #
-#           Busybox and similar reduced shells will NOT work, because this script
-#           requires all of these POSIX shell features:
-#             * functions;
-#             * expansions «$var», «${var}», «${var:-default}», «${var+SET}»,
-#               «${var#prefix}», «${var%suffix}», and «$( cmd )»;
-#             * compound commands having a testable exit status, especially «case»;
-#             * various built-in commands including «command», «set», and «ulimit».
+#       Busybox and similar reduced shells will NOT work, because this script
+#       requires all of these POSIX shell features:
+#         * functions;
+#         * expansions «$var», «${var}», «${var:-default}», «${var+SET}»,
+#           «${var#prefix}», «${var%suffix}», and «$( cmd )»;
+#         * compound commands having a testable exit status, especially «case»;
+#         * various built-in commands including «command», «set», and «ulimit».
 #
-#       (2) This script targets any POSIX shell, so it avoids extensions provided
-#           by Bash, Ksh, etc; in particular arrays are avoided.
+#   Important for patching:
+#
+#   (2) This script targets any POSIX shell, so it avoids extensions provided
+#       by Bash, Ksh, etc; in particular arrays are avoided.
 #
 #       The "traditional" practice of packing multiple parameters into a
 #       space-separated string is a well documented source of bugs and security
@@ -52,9 +54,9 @@
 #       There are tweaks for specific operating systems such as AIX, CygWin,
 #       Darwin, MinGW, and NonStop.
 #
-#       (3) This script is generated from the Groovy template
-#           https://github.com/gradle/gradle/blob/HEAD/subprojects/plugins/src/main/resources/org/gradle/api/internal/plugins/unixStartScript.txt
-#           within the Gradle project.
+#   (3) This script is generated from the Groovy template
+#       https://github.com/gradle/gradle/blob/HEAD/subprojects/plugins/src/main/resources/org/gradle/api/internal/plugins/unixStartScript.txt
+#       within the Gradle project.
 #
 #       You can find Gradle at https://github.com/gradle/gradle/.
 #
@@ -81,7 +83,8 @@ done
 # This is normally unused
 # shellcheck disable=SC2034
 APP_BASE_NAME=${0##*/}
-APP_HOME=$( cd "${APP_HOME:-./}" && pwd -P ) || exit
+# Discard cd standard output in case $CDPATH is set (https://github.com/gradle/gradle/issues/25036)
+APP_HOME=$( cd "${APP_HOME:-./}" > /dev/null && pwd -P ) || exit
 
 # Use the maximum available, or set MAX_FD != -1 to use that value.
 MAX_FD=maximum
@@ -142,7 +145,7 @@ if ! "$cygwin" && ! "$darwin" && ! "$nonstop" ; then
     case $MAX_FD in #(
       max*)
         # In POSIX sh, ulimit -H is undefined. That's why the result is checked to see if it worked.
-        # shellcheck disable=SC3045
+        # shellcheck disable=SC2039,SC3045
         MAX_FD=$( ulimit -H -n ) ||
             warn "Could not query maximum file descriptor limit"
     esac
@@ -150,7 +153,7 @@ if ! "$cygwin" && ! "$darwin" && ! "$nonstop" ; then
       '' | soft) :;; #(
       *)
         # In POSIX sh, ulimit -n is undefined. That's why the result is checked to see if it worked.
-        # shellcheck disable=SC3045
+        # shellcheck disable=SC2039,SC3045
         ulimit -n "$MAX_FD" ||
             warn "Could not set maximum file descriptor limit to $MAX_FD"
     esac
